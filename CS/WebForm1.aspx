@@ -15,7 +15,6 @@
             grid = arg.GetWidget();
             var baseFunc = grid.option('onContextMenuPreparing');
             grid.option('onContextMenuPreparing', function (e) {
-                debugger;
                 if (baseFunc)
                     baseFunc(e);
                 else
