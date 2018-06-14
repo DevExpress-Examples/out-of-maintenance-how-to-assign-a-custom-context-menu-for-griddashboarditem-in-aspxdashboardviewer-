@@ -11,30 +11,34 @@
 	<title></title>
 	<script type="text/javascript">
 	    var grid;
-	    function OnItemWidgetCreated(s, arg) {
-	        grid = arg.GetWidget();
-	        var baseFunc = grid.option('onContextMenuPreparing');
-	        grid.option('onContextMenuPreparing', function (e) {
-	            baseFunc(e);
-	            if (e.row.rowType === "data") {
-	                e.items.push({
-	                    text: 'Item',
-	                    onItemClick: function () {
-	                    }
-	                });
-	                e.items.push({
-	                    text: 'SubItems',
-	                    onItemClick: function () {
-	                    },
-	                    items: [{
-	                        text: 'SubItem',
-	                        onItemClick: function () {
-	                        }
-	                    }]
-	                });
-	            }
-	        });
-	    }
+        function OnItemWidgetCreated(s, arg) {
+            grid = arg.GetWidget();
+            var baseFunc = grid.option('onContextMenuPreparing');
+            grid.option('onContextMenuPreparing', function (e) {
+                if (baseFunc)
+                    baseFunc(e);
+                else
+                    e.items = [];
+
+                if (e.row.rowType === "data") {
+                    e.items.push({
+                        text: 'Item',
+                        onItemClick: function () {
+                        }
+                    });
+                    e.items.push({
+                        text: 'SubItems',
+                        onItemClick: function () {
+                        },
+                        items: [{
+                            text: 'SubItem',
+                            onItemClick: function () {
+                            }
+                        }]
+                    });
+                }
+            });
+        }
 	</script>
 </head>
 
